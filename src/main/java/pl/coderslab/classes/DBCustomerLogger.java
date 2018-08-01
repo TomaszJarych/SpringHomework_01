@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import pl.coderslab.dbUtil.DbUtil;
 @Component
 @Qualifier("DBCustomerLogger")
 public class DBCustomerLogger implements CustomerLogger {
@@ -18,7 +20,7 @@ public class DBCustomerLogger implements CustomerLogger {
 	@Override
 	public void log() {
 
-		try (Connection conn = DriverManager.getConnection(JDBC_CONNECTION, USER, PASSWORD)){
+		try (Connection conn = DbUtil.getConnection()){
 			String logEntry = LocalDateTime.now() + " : Customer operation";
 			System.out.println(logEntry);
 			PreparedStatement preparedStatement = conn.prepareStatement(INSERT_INTO_DB);

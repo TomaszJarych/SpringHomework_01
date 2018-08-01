@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import pl.coderslab.classes.Customer;
 import pl.coderslab.classes.CustomerLogger;
+import pl.coderslab.classes.CustomerRepository;
 import pl.coderslab.classes.MemoryCustomerRepository;
 
 public class AppMain {
@@ -14,12 +15,13 @@ public class AppMain {
 			CustomerLogger logger = context.getBean("simpleCustomerLogger", CustomerLogger.class);
 			Customer customer = new Customer(1, "Jan", "Nowak");
 			Customer customer2 = new Customer(2, "Adam", "Nowak");
-			MemoryCustomerRepository repository = 
-					context.getBean("memoryCustomerRepository", MemoryCustomerRepository.class);
+			Customer customer3 = new Customer(3, "Marta", "Adamska");
+			CustomerRepository repository = context.getBean("DBCustomerRepository", CustomerRepository.class);
 			repository.addCustomer(customer);
 			repository.addCustomer(customer2);
 			repository.removeCustomer(customer);
-			
-			}
+			repository.addCustomer(customer3);
+
 		}
+	}
 }
