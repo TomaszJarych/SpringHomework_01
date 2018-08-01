@@ -13,9 +13,13 @@ public class AppMain {
 		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class)) {
 			CustomerLogger logger = context.getBean("simpleCustomerLogger", CustomerLogger.class);
 			Customer customer = new Customer(1, "Jan", "Nowak");
+			Customer customer2 = new Customer(2, "Adam", "Nowak");
 			MemoryCustomerRepository repository = 
 					context.getBean("memoryCustomerRepository", MemoryCustomerRepository.class);
-			repository.addCustorem(customer);
+			repository.addCustomer(customer);
+			repository.addCustomer(customer2);
+			repository.removeCustomer(customer);
+			
 			}
 		}
 }

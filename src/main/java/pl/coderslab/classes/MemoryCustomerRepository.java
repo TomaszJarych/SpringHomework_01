@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 @Component
 public class MemoryCustomerRepository implements CustomerRepository {
 	private List<Customer> list;
 	CustomerLogger customerLogger;
 	@Autowired
-	public MemoryCustomerRepository(SimpleCustomerLogger customerLogger) {
+	public MemoryCustomerRepository(@Qualifier("DBCustomerLogger")CustomerLogger customerLogger) {
 		this.customerLogger = customerLogger;
 		this.list = new ArrayList<>();
 	}
@@ -20,7 +21,7 @@ public class MemoryCustomerRepository implements CustomerRepository {
 	}
 
 	@Override
-	public void addCustorem(Customer customer) {
+	public void addCustomer(Customer customer) {
 		this.customerLogger.log();
 		this.list.add(customer);
 		
